@@ -1,6 +1,5 @@
 <shell>
-    hello
-</shell>
+  </shell>
 
 
 
@@ -9,8 +8,7 @@ admin view: show issues and partner and one motivation specific qoute
 -->
 <div class="md-hue-1" layout layout-margin>
 
-
-    <h3>Issue Overview</h3>
+    <h3>drleeslab > Issue Overview</h3>
 </div>
 
 
@@ -22,7 +20,7 @@ admin view: show issues and partner and one motivation specific qoute
 
 
 
-<md-grid-list class="things-list" md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
+<md-grid-list class="things-list" md-cols="1" md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="8px" md-gutter-gt-sm="4px">
     <md-grid-tile ng-repeat="issue in issues track by $index" ng-class="getColor($index)" md-rowspan="1" md-colspan="1" md-colspan-sm="1" ng-click="showIssueDialog(issue)">
         <md-grid-tile-header>
             <h2 layout-margin>#{{issue.number}} {{issue.title}}</h2></md-grid-tile-header>
@@ -34,6 +32,7 @@ admin view: show issues and partner and one motivation specific qoute
         <div layout="column">
             <!-- labels-->
             <div layout="row" layout-align="end end" class="labeldiv">
+              <!-- <md-icon class="action-icons" md-svg-icon="action:label"></md-icon> -->
                 <span layout="row" layout-margin layout-padding class="issuelabel" style="background-color: #{{label.color}}; border-color: #{{label.color}};" ng-repeat="label in issue.labels">
       {{label.name}}</span>
             </div>
@@ -48,11 +47,11 @@ admin view: show issues and partner and one motivation specific qoute
                             <!-- <md-icon class="avatar-icon" md-svg-icon="avatar:svg-{{ (parseInt(user.id) + 1) % 11 }}"></md-icon> -->
                         </div>
                         <div ng-show="user.isSuggesting">
-                            <md-button ng-click="suggestPartner(issue, user.index+1)" class="not-him-button noclick"><span class="noclick">not him</span></md-button>
-                            <md-button ng-click="acceptPartner(user)" class="him-button noclick"><span class="noclick">him</span></md-button>
+                            <md-button ng-click="suggestPartner(issue, user.index+1)" class="not-him-button not-me-color noclick"><span class="noclick">not him</span></md-button>
+                            <md-button ng-click="acceptPartner(user)" class="him-button me-color noclick"><span class="noclick">him</span></md-button>
                         </div>
                         <div>
-                            {{user.login}}
+                            <h4>{{user.login}}</h4>
                         </div>
                         <div layout="row" layout-margin>
                             <img layout="row" style="-webkit-user-select: none; height: 40px" src="{{userLookup[user.login].assessment.personality_blend.personality_type_1.badge.image_small}}">
@@ -69,10 +68,11 @@ admin view: show issues and partner and one motivation specific qoute
                             </div>
                         </div>
                         <div>
-                            <md-button ng-click="suggestPartner(issue)"><span id="magicbutton">find the right person</span></md-button>
+                          <div>
+                              <h4></h4>
+                          </div>
+                            <md-button class="md-accent md-raised" ng-click="suggestPartner(issue)"><span id="magicbutton">find the right person</span></md-button>
                         </div>
-                        {{user}}
-
                     </div>
                 </div>
             </div>
@@ -81,6 +81,3 @@ admin view: show issues and partner and one motivation specific qoute
 
     </md-grid-tile>
 </md-grid-list>
-
-
-give hints about how to deal with this person!

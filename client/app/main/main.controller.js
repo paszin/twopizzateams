@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('perfectteamApp')
-  .controller('MainCtrl', function ($scope, $rootScope, $http, socket, issueDialog, Auth, User, githubdata) {
+  .controller('MainCtrl', function ($scope, $rootScope, $http, socket, issueDialog, Auth, User, githubdata, ghsubscribers) {
 
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.currentUser = User.get();
@@ -40,13 +40,13 @@ angular.module('perfectteamApp')
 
     }
 
-    function getFamousPerson(username) {
-      return $rootScope.userLookup[username].assessment.personality_traits[0].personality_trait.personality_type.famous_people[0];
-    }
+
 
     function getSubscribers() {
       $http.get("https://api.github.com/repos/paszin/drleeslab/subscribers").success(function(subscribers) {
         $scope.subscribers = subscribers;
+    }).error(function(err) {
+      $scope.subscribers = ghsubscribers;
     });
   }
 
@@ -73,6 +73,9 @@ angular.module('perfectteamApp')
           //issue.imagedescription = "It's like " + getFamousPerson(user1.login).name + " meets " + getFamousPerson(user2.login).name;
           //issue.assignees = [user1, user2];
         });
+    }).error(function(err) {
+      console.log("are you offline?");
+      $scope.issues = githubdata;
     });
     }
 
@@ -82,6 +85,7 @@ angular.module('perfectteamApp')
       if (i == undefined) {
         i = 0;
       }
+      i = i % $scope.subscribers.length;
       for (i; i < $scope.subscribers.length; i++) {
         if ($rootScope.userLookup[$scope.subscribers[i].login] && $scope.subscribers[i].login != first.login) {
           issue.assignees[1] = $scope.subscribers[i];

@@ -1,9 +1,14 @@
 'use strict';
 var _ = require('lodash');
+var traitify = require('traitify');
 var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+
+traitify.setHost("https://api.traitify.com");
+traitify.setVersion("v1");
+traitify.setSecretKey(process.env.TRAITIFY_SECRET);
 
 var validationError = function(res, err) {
   return res.status(422).json(err);
@@ -27,11 +32,38 @@ exports.create = function (req, res, next) {
   var newUser = new User(req.body);
   newUser.provider = 'local';
   newUser.role = 'user';
-  newUser.save(function(err, user) {
-    if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-    res.json({ token: token });
-  });
+  //create an assessment
+  var deckId = "career-deck";
+  console.log("create assessment");
+//   try {
+//   traitify.createAssessment(deckId, function(assessment){
+//     // Use assessment here.
+//     console.log("created assessment");
+//     console.log(assessment);
+//     newUser.assessmentId = assessment.id;
+//     newUser.save(function(err, user) {
+//       if (err) return validationError(res, err);
+//       var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+//       res.json({ token: token });
+//     });
+//   });
+// } catch(err) {
+//   console.log("use default assessid, because");
+//   console.log(err);
+//   newUser.assessmentId = "01b5f931-acdf-4254-97eb-81a127777595";
+//   newUser.save(function(err, user) {
+//     if (err) return validationError(res, err);
+//     var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+//     res.json({ token: token });
+//   });
+// }
+newUser.assessmentId = "85b5b3d3-fd77-4ca1-bcbc-61c39184e72f" || "cafcab6f-c4db-4780-87d1-12d848efbca7"; 
+newUser.save(function(err, user) {
+  if (err) return validationError(res, err);
+  var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+  res.json({ token: token });
+});
+
 };
 
 /**

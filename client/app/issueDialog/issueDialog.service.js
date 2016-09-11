@@ -31,15 +31,28 @@ function issueDialog($log, $mdDialog, $mdMedia) {
       if ($scope.issue.assignees.length >= 2) {
         $scope.user1 = $rootScope.userLookup[$scope.issue.assignees[0].login];
         $scope.user1.avatar_url = $scope.issue.assignees[0].avatar_url;
+        $scope.user1.login = $scope.issue.assignees[0].login;
         if ($scope.user1 == undefined) {
           console.log("no user found 1");
         }
+        //$scope.user2 = _.merge($scope.issue.assignees[1], $rootScope.userLookup[$scope.issue.assignees[1]]);
         $scope.user2 = $rootScope.userLookup[$scope.issue.assignees[1].login];
         $scope.user2.avatar_url = $scope.issue.assignees[1].avatar_url;
+        $scope.user2.login = $scope.issue.assignees[1].login;
+        //$scope.user2.avatar_url = $scope.issue.assignees[1].avatar_url;
         if ($scope.user2 == undefined) {
           console.log("no user found 2");
         }
       }
+
+      function getFamousPerson(username) {
+        return $rootScope.userLookup[username].assessment.personality_traits[0].personality_trait.personality_type.famous_people[0];
+      }
+
+      if ($scope.user1.login && $scope.user2.login) {
+        issue.imagedescription = " is like " + getFamousPerson($scope.user1.login).name + " meets " + getFamousPerson($scope.user2.login).name;
+      }
+
       console.log($scope.user1.assessmentId);
       Traitify.setPublicKey("g6i16p2618i8iurgm981bfvnmh");
         Traitify.setHost("https://api.traitify.com");

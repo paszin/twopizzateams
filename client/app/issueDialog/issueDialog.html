@@ -10,11 +10,13 @@
     </md-toolbar>
     <md-dialog-content>
         <div class="md-dialog-content">
-          <h1>
+          <h1 style="text-align: center">
             {{issue.title}}
           </h1>
-          <p>
+          <p style="text-align: center">
             {{issue.body}}
+          </p>
+          <p>
           </p>
           <div layout="row">
             <!-- user1 -->
@@ -36,17 +38,14 @@
                 <span>{{user1.assessment.personality_blend.personality_type_1.name}} & {{user1.assessment.personality_blend.personality_type_2.name}}</span>
 <div class="traitify-widget1"></div>
               </div>
-              More infos
+              <md-divider></md-divider>
               <!-- {{user1.assessment.personality_traits[0].personality_trait}} -->
-              <h5>{{user1.assessment.personality_blend.details[0].title}}</h5>
-              <p ng-bind-html="user1.assessment.personality_blend.details[0].body"></p>
+              <h5 ng-show="user1.assessment.personality_blend.details[0].body">{{user1.assessment.personality_blend.details[0].title}}</h5>
+              <p ng-show="user1.assessment.personality_blend.details[0].body"> {{user1.assessment.personality_blend.details[0].body}}</p>
 
               <h5>{{user1.assessment.personality_blend.details[1].title}}</h5>
-              <p>
-                {{user1.assessment.personality_blend.details[1].body}}
-              </p>
+              <p>{{user1.assessment.personality_blend.details[1].body}}</p>
 
-              <!-- {{user1.assessment.personality_blend.name}} -->
             </div>
 
             <!-- user2 -->
@@ -68,10 +67,10 @@
                   <span>{{user2.assessment.personality_blend.personality_type_1.name}} & {{user2.assessment.personality_blend.personality_type_2.name}}</span>
   <div class="traitify-widget2"></div>
                 </div>
-                More infos
+                <md-divider></md-divider>
                 <!-- {{user1.assessment.personality_traits[0].personality_trait}} -->
-                <h5>{{user2.assessment.personality_blend.details[0].title}}</h5>
-                <p>{{user2.assessment.personality_blend.details[0].body}}</p>
+                <h5 ng-show="user2.assessment.personality_blend.details[0].body">{{user2.assessment.personality_blend.details[0].title}}</h5>
+                <p ng-show="user2.assessment.personality_blend.details[0].body">{{user2.assessment.personality_blend.details[0].body}}</p>
 
                 <h5>{{user2.assessment.personality_blend.details[1].title}}</h5>
                 <p>
@@ -85,6 +84,11 @@
             </div>
 
         </div>
+        <md-divider></md-divider>
+        <h5 ng-show="issue.imagedescription" style="text-align: center">
+          {{user1.login}} and {{user2.login}} {{issue.imagedescription}}
+        </h5>
+
     </md-dialog-content>
     <!-- <md-dialog-actions layout="row">
         <md-button class="md-accent md-raised" ng-click="answer()" style="margin-right:20px;">

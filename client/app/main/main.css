@@ -1,5 +1,12 @@
 
 
+.me-color {
+  background-color: #628CFA;
+}
+
+.not-me-color {
+  background-color: #CB4E4E;
+}
 
 .issuelabel {
   border-width: 5px !important;
@@ -23,13 +30,11 @@
 .him-button {
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-  background-color: blue;
 }
 
 .not-him-button {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  background-color: red;
 }
 
 .things-list md-grid-tile {
@@ -75,7 +80,7 @@
 
 
   .things-list .cool {
-    background: #7d7ea0; }
+    background: #8d8ea6; }
 
 
 .things-list .darkBlue {
