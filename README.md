@@ -20,3 +20,5 @@ Find the perfect teams based on their personality.
 
 ![screen1](https://github.com/paszin/twopizzateams/blob/master/screenshot1.jpeg?raw=true "screen1")
 
+
+![screen2](https://github.com/paszin/twopizzateams/blob/master/screenshot2.jpeg?raw=true "screen2")
