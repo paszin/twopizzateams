@@ -5,7 +5,7 @@ angular.module('perfectteamApp')
     $stateProvider
       .state('assessment', {
         url: '/assessment?demo',
-        templateUrl: 'app/assesment/assesment.html',
-        controller: 'AssesmentCtrl'
+        templateUrl: 'app/assessment/assessment.html',
+        controller: 'AssessmentCtrl'
       });
   });

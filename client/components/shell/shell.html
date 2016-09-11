@@ -1,7 +1,7 @@
 <div ng-controller="ShellCtrl" class="main-shell">
   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
     <md-toolbar class="md-tall md-accent">
-      
+
       <div ng-if="isLoggedIn()" layout="column" layout-padding class="profile-container">
         <div flex></div>
         <div layout-padding layout="column">
@@ -9,10 +9,12 @@
           <div class="profile-email">{{ getCurrentUser().email }}</div>
         </div>
       </div>
-      
+
     </md-toolbar>
     <md-content layout-padding>
-
+      <div class="" ng-repeat="rep in repos">
+        {{rep.name}}
+      </div>
     </md-content>
   </md-sidenav>
   <md-toolbar>
@@ -53,7 +55,7 @@
               {{notificationsEnabled ? 'Disable' : 'Enable' }} notifications
             </md-button>
           </md-menu-item>
-          
+
           <md-menu-divider></md-menu-divider>
           <md-menu-item ng-hide="isLoggedIn()" ui-sref="login">
             <md-button>
@@ -73,7 +75,7 @@
               Logout
             </md-button>
           </md-menu-item>
-          
+
         </md-menu-content>
       </md-menu>
     </div>

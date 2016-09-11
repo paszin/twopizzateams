@@ -8,6 +8,8 @@ angular.module('perfectteamApp')
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
 
+    $scope.repos = [{name: "soundcloudfire"}, {name: "drleeslab"}];
+
     $scope.logout = function() {
       Auth.logout();
       $location.path('/login');

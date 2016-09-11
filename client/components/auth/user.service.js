@@ -17,6 +17,9 @@ angular.module('perfectteamApp')
         params: {
           id:'me'
         }
+      },
+      getById: {
+        method: 'GET',
       }
 	  });
   });

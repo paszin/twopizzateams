@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/perfectteam-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };

@@ -15,8 +15,8 @@ angular.module('perfectteamApp')
           password: $scope.user.password
         })
         .then( function() {
-          // Account created, redirect to home
-          $location.path('/');
+          // Account created, redirect to assessment
+          $location.path('/assessment');
         })
         .catch( function(err) {
           err = err.data;

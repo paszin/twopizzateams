@@ -1,6 +1,24 @@
+
+
+
+.issuelabel {
+  border-width: 5px !important;
+  border-radius: 2px;
+}
+
+.labeldiv {
+  padding-top: 50px;
+}
+
+.highlight {
+  background-color: 'red';
+}
+
+
 .things-list {
  margin: 8px;
 }
+
 
 .things-list md-grid-tile {
  transition: all 400ms ease-out 50ms;

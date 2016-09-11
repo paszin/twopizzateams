@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('perfectteamApp')
-  .controller('AssesmentCtrl', function ($scope, $stateParams, $http, Auth) {
+  .controller('AssessmentCtrl', function ($scope, $stateParams, $http, Auth) {
     var user = Auth.getCurrentUser();
     if (!user) {
       console.log("please login");
     }
     function getAssessment(aid, callback) {
-    var url = "https://api.traitify.com/v1/assessments/asid?data=blend,types,traits,career_matches"
+    var url = "https://api.traitify.com/v1/assessments/asid?data=blend,types,traits"
     $http.get(url.replace("asid", aid),
       {headers: {"Authorization": "Basic g6i16p2618i8iurgm981bfvnmh:x"}}).success(function(data) {
       callback(data);
