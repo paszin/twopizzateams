@@ -14,14 +14,14 @@
             {{issue.title}}
           </h1>
           <p>
-            {{issue.title}}
+            {{issue.body}}
           </p>
           <div layout="row">
             <!-- user1 -->
             <div layout="column" flex="50">
               <div layout="column" layout-align="center center" ng-show="!!user1">
                 <div layout="column" layout-align="center center">
-                    <md-icon class="avatar-icon" md-svg-icon="avatar:svg-{{ (parseInt(user.id) + 1) % 11 }}"></md-icon>
+                    <img src="{{user1.avatar_url}}" style="height: 150px; border-radius: 50%">
                 </div>
                 <div>
                   {{user1.name}}
@@ -34,7 +34,7 @@
                   src="{{user1.assessment.personality_blend.personality_type_2.badge.image_small}}">
                 </div>
                 <span>{{user1.assessment.personality_blend.personality_type_1.name}} & {{user1.assessment.personality_blend.personality_type_2.name}}</span>
-<div class="traitify-widget"></div>
+<div class="traitify-widget1"></div>
               </div>
               More infos
               <!-- {{user1.assessment.personality_traits[0].personality_trait}} -->
@@ -51,32 +51,31 @@
 
             <!-- user2 -->
             <div layout="column" flex="50">
-              <div layout="column" flex="50">
-                <div layout="column" layout-align="center center" ng-show="!!user1">
+                <div layout="column" layout-align="center center" ng-show="!!user2">
                   <div layout="column" layout-align="center center">
-                      <md-icon class="avatar-icon" md-svg-icon="avatar:svg-{{ (parseInt(user.id) + 1) % 11 }}"></md-icon>
+                    <img src="{{user2.avatar_url}}" style="height: 150px; border-radius: 50%">
                   </div>
                   <div>
-                    {{user1.name}}
+                    {{user2.name}}
 
                   </div>
                   <div layout="row" layout-margin>
                     <img layout="row" style="-webkit-user-select: none; height: 40px"
-                    src="{{user1.assessment.personality_blend.personality_type_1.badge.image_small}}">
+                    src="{{user2.assessment.personality_blend.personality_type_1.badge.image_small}}">
                     <img layout="row" style="-webkit-user-select: none; height: 40px"
-                    src="{{user1.assessment.personality_blend.personality_type_2.badge.image_small}}">
+                    src="{{user2.assessment.personality_blend.personality_type_2.badge.image_small}}">
                   </div>
-                  <span>{{user1.assessment.personality_blend.personality_type_1.name}} & {{user1.assessment.personality_blend.personality_type_2.name}}</span>
-  <div class="traitify-widget"></div>
+                  <span>{{user2.assessment.personality_blend.personality_type_1.name}} & {{user2.assessment.personality_blend.personality_type_2.name}}</span>
+  <div class="traitify-widget2"></div>
                 </div>
                 More infos
                 <!-- {{user1.assessment.personality_traits[0].personality_trait}} -->
-                <h5>{{user1.assessment.personality_blend.details[0].title}}</h5>
-                <p ng-bind-html="user1.assessment.personality_blend.details[0].body"></p>
+                <h5>{{user2.assessment.personality_blend.details[0].title}}</h5>
+                <p>{{user2.assessment.personality_blend.details[0].body}}</p>
 
-                <h5>{{user1.assessment.personality_blend.details[1].title}}</h5>
+                <h5>{{user2.assessment.personality_blend.details[1].title}}</h5>
                 <p>
-                  {{user1.assessment.personality_blend.details[1].body}}
+                  {{user2.assessment.personality_blend.details[1].body}}
                 </p>
 
                 <!-- {{user1.assessment.personality_blend.name}} -->
@@ -84,19 +83,6 @@
 
 
             </div>
-
-          </div>
-
-          <p>
-
-
-
-
-
-
-            <!-- {{user2.personality_traits}} -->
-          </p>
-
 
         </div>
     </md-dialog-content>

@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module('perfectteamApp')
-  .controller('MainCtrl', function ($scope, $rootScope, $http, socket, issueDialog, githubdata) {
+  .controller('MainCtrl', function ($scope, $rootScope, $http, socket, issueDialog, Auth, User, githubdata) {
+
+    $scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.currentUser = User.get();
 
     $scope.showIssueDialog = function(issue) {
-      if (event.target.type == "button" || event.target.id == "magicbutton") {
+      if (event.target.type == "button" || event.target.id == "magicbutton" || event.target.className.indexOf("noclick") > -1) {
         console.log("find a match");
         return;
       }
@@ -33,9 +36,21 @@ angular.module('perfectteamApp')
       return user;
     }
 
+    function extractUser(user) {
+
+    }
+
     function getFamousPerson(username) {
       return $rootScope.userLookup[username].assessment.personality_traits[0].personality_trait.personality_type.famous_people[0];
     }
+
+    function getSubscribers() {
+      $http.get("https://api.github.com/repos/paszin/drleeslab/subscribers").success(function(subscribers) {
+        $scope.subscribers = subscribers;
+    });
+  }
+
+    getSubscribers();
 
     function getIssues() {
       var repo = "https://api.github.com/repos/paszin/drleeslab/issues";
@@ -48,17 +63,41 @@ angular.module('perfectteamApp')
           "isMissing": false
         };
         $scope.issues.forEach(function(issue) {
-          var user1 = randomizeUser(template);
-          var user2 = randomizeUser(template); //randomizeUser(template);
-          issue.imagedescription = "It's like " + getFamousPerson(user1.login).name + " meets " + getFamousPerson(user2.login).name;
-          issue.assignees = [user1, user2];
+          console.log(issue.assignees);
+          for (var i = issue.assignees.length; i < 2; i++) {
+             issue.assignees[i] = {"isMissing": true};
+           }
+
+          //var user1 = randomizeUser(template);
+          //var user2 = randomizeUser(template); //randomizeUser(template);
+          //issue.imagedescription = "It's like " + getFamousPerson(user1.login).name + " meets " + getFamousPerson(user2.login).name;
+          //issue.assignees = [user1, user2];
         });
     });
     }
 
+    $scope.suggestPartner = function(issue, i) {
+      //choose person with least issues first, skip partner
+      var first = issue.assignees[0];
+      if (i == undefined) {
+        i = 0;
+      }
+      for (i; i < $scope.subscribers.length; i++) {
+        if ($rootScope.userLookup[$scope.subscribers[i].login] && $scope.subscribers[i].login != first.login) {
+          issue.assignees[1] = $scope.subscribers[i];
+          issue.assignees[1].isSuggesting = true;
+          issue.assignees[1].index = i;
+          break;
+        }
+      }
+    };
+
+    $scope.acceptPartner = function(user) {
+      user.isSuggesting = false;
+    };
 
     $scope.getColor = function($index) {
-      return "darkBlue";
+      return "cool";
       var _d = ($index + 1) % 11;
       var bg = '';
 

@@ -30,10 +30,12 @@ function issueDialog($log, $mdDialog, $mdMedia) {
       $scope.issue = issue;
       if ($scope.issue.assignees.length >= 2) {
         $scope.user1 = $rootScope.userLookup[$scope.issue.assignees[0].login];
+        $scope.user1.avatar_url = $scope.issue.assignees[0].avatar_url;
         if ($scope.user1 == undefined) {
           console.log("no user found 1");
         }
         $scope.user2 = $rootScope.userLookup[$scope.issue.assignees[1].login];
+        $scope.user2.avatar_url = $scope.issue.assignees[1].avatar_url;
         if ($scope.user2 == undefined) {
           console.log("no user found 2");
         }
@@ -43,12 +45,19 @@ function issueDialog($log, $mdDialog, $mdMedia) {
         Traitify.setHost("https://api.traitify.com");
         Traitify.setVersion("v1");
         setTimeout(function () {
-          var traitify = Traitify.ui.load("personalityTraits", $scope.user1.assessmentId, ".traitify-widget"); // Example selector for widget target
+          var traitify = Traitify.ui.load("personalityTraits", $scope.user1.assessmentId, ".traitify-widget1"); // Example selector for widget target
         traitify.onInitialize(function(){
             console.log(traitify.data.get("PersonalityTraits"));
             console.log("Initialized!");
         });
       }, 1000);
+      setTimeout(function () {
+        var traitify = Traitify.ui.load("personalityTraits", $scope.user2.assessmentId, ".traitify-widget2"); // Example selector for widget target
+      traitify.onInitialize(function(){
+          console.log(traitify.data.get("PersonalityTraits"));
+          console.log("Initialized!");
+      });
+    }, 1000);
 
 
 

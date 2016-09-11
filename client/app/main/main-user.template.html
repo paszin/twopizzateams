@@ -1,6 +1,62 @@
 <h1>You are a {{}}</h1>
 
 
-
+this is the user view
 
 <h2>Your Tasks</h2>
+
+
+<md-grid-list class="things-list" md-cols-sm="1" md-cols-md="2" md-cols-gt-md="3"
+md-row-height-gt-md="1:1" md-row-height="4:3"
+md-gutter="8px" md-gutter-gt-sm="4px">
+<md-grid-tile ng-repeat="issue in issues track by $index" ng-class="getColor($index)" md-rowspan="1"
+md-colspan="1"
+md-colspan-sm="1" ng-click="showIssueDialog(issue)">
+<md-grid-tile-header><h2 layout-margin>{{issue.title}}</h2></md-grid-tile-header>
+<!--
+<md-button aria-label="Remove item" class="md-icon-button delete-btn" ng-click="deleteThing(thing)">
+<md-icon style="fill: #fff" md-svg-icon="action:delete"></md-icon>
+</md-button> -->
+<!-- labels-->
+<div layout="column">
+  <div layout="row"  layout-align="end end" class="labeldiv">
+    <span layout="row" layout-margin layout-padding class="issuelabel" style="background-color: #{{label.color}}; border-color: #{{label.color}};" ng-repeat="label in issue.labels">
+      {{label.name}}</span>
+  </div>
+  <div layout="row">
+    <div ng-repeat="user in issue.assignees track by $index" layout="row">
+      <div layout="column" layout-align="center center" ng-show="!user.isMissing">
+        <div layout="column" layout-align="center center">
+            <md-icon class="avatar-icon" md-svg-icon="avatar:svg-{{ (parseInt(user.id) + 1) % 11 }}"></md-icon>
+        </div>
+        <div>
+          {{user.login}}
+
+        </div>
+        <div layout="row" layout-margin>
+          <img layout="row" style="-webkit-user-select: none; height: 40px"
+          src="{{userLookup[user.login].assessment.personality_blend.personality_type_1.badge.image_small}}">
+          <img layout="row" style="-webkit-user-select: none; height: 40px"
+          src="{{userLookup[user.login].assessment.personality_blend.personality_type_2.badge.image_small}}">
+        </div>
+        <span>{{userLookup[user.login].assessment.personality_blend.personality_type_1.name}} & {{userLookup[user.login].assessment.personality_blend.personality_type_2.name}}</span>
+      </div>
+
+      <div layout="column" layout-align="center center" ng-show="user.isMissing">
+        <div layout="column" layout-align="center center">
+          <div layout layout-align="center center">
+            <md-icon class="avatar-icon" md-svg-icon="avatar:svg-{{ 8 }}"></md-icon>
+          </div>
+        </div>
+        <div>
+          <md-button><span id="magicbutton">find the right person<span></md-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <span ng-show="!issue.assignees[0].isMissing && !issue.assignees[1].isMissing" style="text-align: center; padding-top: 30px" layout-margin>{{issue.imagedescription}}</span>
+</div>
+
+</md-grid-tile>
+</md-grid-list>

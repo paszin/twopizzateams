@@ -20,6 +20,18 @@
 }
 
 
+.him-button {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: blue;
+}
+
+.not-him-button {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: red;
+}
+
 .things-list md-grid-tile {
  transition: all 400ms ease-out 50ms;
 }
@@ -50,7 +62,7 @@
   margin: 8px; }
 
 .things-list .gray {
-  background: #f5f5f5; }
+  background: #a5a5a5; }
 
 .things-list .green {
   background: #b9f6ca; }
@@ -60,6 +72,11 @@
 
 .things-list .blue {
   background: #84ffff; }
+
+
+  .things-list .cool {
+    background: #7d7ea0; }
+
 
 .things-list .darkBlue {
   background: #80d8ff; }

@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('perfectteamApp')
-  .controller('AssessmentCtrl', function ($scope, $stateParams, $http, Auth) {
+  .controller('AssessmentCtrl', function ($scope, $stateParams, $http, $location, Auth) {
+
+    //$scope.done = true;
+    $scope.location = $location;
     var user = Auth.getCurrentUser();
     if (!user) {
       console.log("please login");
@@ -29,6 +32,7 @@ angular.module('perfectteamApp')
       var assessmentId = user.assessmentId;
       var traitify = Traitify.ui.load(assessmentId, ".assessment");
       traitify.slideDeck.onFinished(function() {
+        $scope.done = true;
         getAssessment(assessmentId, saveAssessment);
       });
 
