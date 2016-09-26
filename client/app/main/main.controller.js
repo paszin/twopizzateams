@@ -3,6 +3,7 @@
 angular.module('perfectteamApp')
   .controller('MainCtrl', function ($scope, $rootScope, $http, socket, issueDialog, Auth, User, githubdata, ghsubscribers) {
 
+
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.currentUser = User.get();
 
